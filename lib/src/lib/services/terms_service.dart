@@ -1,4 +1,5 @@
 import 'package:dart_poeditor/src/lib/entities/term.dart';
+import 'package:dart_poeditor/src/lib/entities/translation.dart';
 import 'base_service.dart';
 
 class TermsService extends ServiceBase {
@@ -15,6 +16,23 @@ class TermsService extends ServiceBase {
       'id': projectId.toString(),
       'language': language,
     }).then(_mapTerms);
+  }
+
+  Future<Map<String, dynamic>> getAsKeyValue(int projectId, String language) async {
+    final listData = await list(projectId, language);
+    final data = <String, dynamic>{};
+
+    for (final entry in listData) {
+      final translation = entry.translation;
+
+      if (translation is PluralTranslation) {
+        data[entry.term] = translation.content.toJson();
+      } else if (translation is SingleTranslation) {
+        data[entry.term] = translation.content;
+      }
+    }
+
+    return data;
   }
 
   Future<List<Term>> _mapTerms(Map<String, dynamic> data) async {

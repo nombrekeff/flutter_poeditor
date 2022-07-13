@@ -24,20 +24,8 @@ abstract class ServiceBase {
               interceptors: [...interceptors, TokenInterceptor(apiToken)],
             );
 
-  Future<Map<String, dynamic>> put(Uri uri, Map data) async {
-    return client.put(uri, body: json.encode(data)).then(onResponse);
-  }
-
   Future<Map<String, dynamic>> post(Uri uri, [Map<String, dynamic>? body = const {}]) async {
     return client.post(uri, body: body).then(onResponse);
-  }
-
-  Future delete(Uri url) {
-    return client.delete(url).then(onResponse);
-  }
-
-  Future<Map<String, dynamic>> get(Uri url) async {
-    return client.get(url).then(onResponse);
   }
 
   FutureOr<Map<String, dynamic>> onResponse(Response response) {

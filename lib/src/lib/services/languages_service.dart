@@ -17,6 +17,20 @@ class LanguagesService extends ServiceBase {
     ).then(_mapLanguages);
   }
 
+  Future add({required int projectId, required String language}) {
+    return post(Uri.parse(url).replace(path: paths.addLanguages), {
+      'id': projectId,
+      'language': language,
+    });
+  }
+
+  Future delete({required int projectId, required String language}) {
+    return post(Uri.parse(url).replace(path: paths.deleteLanguages), {
+      'id': projectId,
+      'language': language,
+    });
+  }
+
   Future<List<Language>> _mapLanguages(Map<String, dynamic> data) async {
     final List<Language> languages = [];
     final jsonList = data['result']['languages'];

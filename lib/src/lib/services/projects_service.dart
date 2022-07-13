@@ -20,6 +20,17 @@ class ProjectsService extends ServiceBase {
     }).then(_mapProject);
   }
 
+  Future<Project> add({required String name, String? description}) {
+    return post(Uri.parse(url).replace(path: paths.viewProject), {
+      'name': name,
+      if (description != null) 'description': description,
+    }).then(_mapProject);
+  }
+
+  Future delete(int projectId) {
+    return post(Uri.parse(url).replace(path: paths.deleteProjects), {'id': projectId});
+  }
+
   Future<List<Project>> _mapProjects(Map<String, dynamic> data) async {
     final List<Project> projects = [];
     final jsonList = data['result']['projects'];

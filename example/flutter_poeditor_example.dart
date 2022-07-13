@@ -11,5 +11,5 @@ void main() {
   // editor.languages.list(545821).then((value) => print(value));
   // editor.projects.list().then((value) => print(value));
   // editor.projects.view(545821).then((value) => print(value));
-  editor.terms.list(545821, 'en').then((value) => print(value));
+  editor.terms.getAsKeyValue(545821, 'en').then((value) => print(value));
 }

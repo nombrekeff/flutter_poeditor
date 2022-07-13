@@ -25,6 +25,8 @@ class Term {
     required this.translation,
   });
 
+  get isPlural => plural.isNotEmpty;
+
   @override
   toString() {
     return 'Term(${jsonEncode(toJson())})';
@@ -41,7 +43,7 @@ class Term {
       'tags': tags,
       'comment': comment,
       'translation': translation.toJson(),
-      'has_plural': plural.isNotEmpty,
+      'has_plural': isPlural,
     };
   }
 
