@@ -1,4 +1,4 @@
-import 'package:flutter_poeditor/src/lib/entities/term.dart';
+import 'package:dart_poeditor/src/lib/entities/term.dart';
 import 'base_service.dart';
 
 class TermsService extends ServiceBase {

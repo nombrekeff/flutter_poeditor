@@ -1,5 +1,5 @@
 import 'package:dotenv/dotenv.dart';
-import 'package:flutter_poeditor/flutter_poeditor.dart';
+import 'package:dart_poeditor/dart_poeditor.dart';
 
 void main() {
   final env = DotEnv()..load(['example/env/.env']);

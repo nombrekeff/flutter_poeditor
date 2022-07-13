@@ -1,4 +1,4 @@
-import 'package:flutter_poeditor/src/lib/entities/project.dart';
+import 'package:dart_poeditor/src/lib/entities/project.dart';
 import 'base_service.dart';
 
 class ProjectsService extends ServiceBase {
