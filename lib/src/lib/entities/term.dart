@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'translation.dart';
 
 class Term {
@@ -23,6 +25,26 @@ class Term {
     required this.translation,
   });
 
+  @override
+  toString() {
+    return 'Term(${jsonEncode(toJson())})';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'term': term,
+      'context': context,
+      'plural': plural,
+      'updated': updated,
+      'created': created,
+      'reference': reference,
+      'tags': tags,
+      'comment': comment,
+      'translation': translation.toJson(),
+      'has_plural': plural.isNotEmpty,
+    };
+  }
+
   factory Term.fromJson(Map<String, dynamic> data) {
     final hasPlural = data['plural'] != '';
     final translation = hasPlural
@@ -35,7 +57,7 @@ class Term {
       plural: data['plural'],
       updated: data['updated'],
       reference: data['reference'],
-      tags: List<String>.from(data['updated']),
+      tags: List<String>.from(data['tags']),
       created: data['created'],
       comment: data['comment'],
       translation: translation,

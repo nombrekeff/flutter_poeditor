@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:http/http.dart';
-
 import '../entities/language.dart';
 import 'base_service.dart';
 
@@ -15,15 +11,13 @@ class LanguagesService extends ServiceBase {
   });
 
   Future<List<Language>> list(int projectId) {
-    return client.post(
+    return post(
       Uri.parse(url).replace(path: paths.listLanguages),
-      body: {'id': '$projectId'},
+      {'id': '$projectId'},
     ).then(_mapLanguages);
   }
 
-  List<Language> _mapLanguages(Response resp) {
-    final data = jsonDecode(resp.body);
-    print(data);
+  Future<List<Language>> _mapLanguages(Map<String, dynamic> data) async {
     final List<Language> languages = [];
     final jsonList = data['result']['languages'];
 

@@ -8,5 +8,8 @@ void main() {
   }
 
   final editor = POEditorAPI(apiToken: env['API_TOKEN'] as String);
-  editor.languages.list(545821).then((value) => print(value));
+  // editor.languages.list(545821).then((value) => print(value));
+  // editor.projects.list().then((value) => print(value));
+  // editor.projects.view(545821).then((value) => print(value));
+  editor.terms.list(545821, 'en').then((value) => print(value));
 }

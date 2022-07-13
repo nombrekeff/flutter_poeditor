@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:http/http.dart';
 import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:http_interceptor/http/interceptor_contract.dart';
@@ -20,4 +23,30 @@ abstract class ServiceBase {
             InterceptedClient.build(
               interceptors: [...interceptors, TokenInterceptor(apiToken)],
             );
+
+  Future<Map<String, dynamic>> put(Uri uri, Map data) async {
+    return client.put(uri, body: json.encode(data)).then(onResponse);
+  }
+
+  Future<Map<String, dynamic>> post(Uri uri, [Map<String, dynamic>? body = const {}]) async {
+    return client.post(uri, body: body).then(onResponse);
+  }
+
+  Future delete(Uri url) {
+    return client.delete(url).then(onResponse);
+  }
+
+  Future<Map<String, dynamic>> get(Uri url) async {
+    return client.get(url).then(onResponse);
+  }
+
+  FutureOr<Map<String, dynamic>> onResponse(Response response) {
+    if (response.statusCode >= 400) {
+      return Future.error(response);
+    }
+
+    return Future.value(
+      response.body.isNotEmpty ? json.decode(response.body) : {},
+    );
+  }
 }

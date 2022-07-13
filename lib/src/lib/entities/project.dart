@@ -25,13 +25,13 @@ class Project {
     return Project(
       id: data['id'],
       created: data['created'],
-      description: data['description'],
+      description: data['description'] ?? '',
       name: data['name'],
-      open: data['open'],
-      public: data['public'],
-      terms: data['terms'],
-      fallbackLanguage: data['fallbackLanguage'],
-      referenceLanguage: data['referenceLanguage'],
+      open: data['open'] ?? 0,
+      public: data['public'] ?? 0,
+      terms: data['terms'] ?? 0,
+      fallbackLanguage: data['fallbackLanguage'] ?? '',
+      referenceLanguage: data['referenceLanguage'] ?? '',
     );
   }
 }

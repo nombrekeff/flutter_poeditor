@@ -8,6 +8,8 @@ abstract class Translation {
     required this.fuzzy,
     required this.proofread,
   });
+
+  Map<String, dynamic> toJson();
 }
 
 class SingleTranslation extends Translation {
@@ -24,9 +26,19 @@ class SingleTranslation extends Translation {
     return SingleTranslation(
       content: data["content"],
       updated: data["updated"],
-      fuzzy: data["fuzzy"],
-      proofread: data["proofread"],
+      fuzzy: data["fuzzy"] ?? 0,
+      proofread: data["proofread"] ?? 0,
     );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'updated': updated,
+      'content': content,
+      'fuzzy': fuzzy,
+      'proofread': proofread,
+    };
   }
 }
 
@@ -40,12 +52,22 @@ class PluralTranslation extends Translation {
     required super.proofread,
   });
 
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'updated': updated,
+      'content': content.toJson(),
+      'fuzzy': fuzzy,
+      'proofread': proofread,
+    };
+  }
+
   factory PluralTranslation.fromJson(Map<String, dynamic> data) {
     return PluralTranslation(
       content: PluralTranslationContent.fromJson(data["content"]),
       updated: data["updated"],
-      fuzzy: data["fuzzy"],
-      proofread: data["proofread"],
+      fuzzy: data["fuzzy"] ?? 0,
+      proofread: data["proofread"] ?? 0,
     );
   }
 }
@@ -64,5 +86,12 @@ class PluralTranslationContent {
       one: data["one"],
       other: data["other"],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'one': one,
+      'other': other,
+    };
   }
 }
