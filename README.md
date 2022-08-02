@@ -11,29 +11,25 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Dart package to communicate with the [POEditor API](https://poeditor.com/docs/api)
 
 ## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Manage your POEditor projects, translations, and terms via it's API from dart.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To install the package check the install [guide](https://pub.dev/packages/dart_poeditor/install)
+
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Check the examples in the `/example` folder. 
 
 ```dart
-const like = 'sample';
+  import 'package:dart_poeditor/dart_poeditor.dart';
+
+  final editor = POEditorAPI(apiToken: env['API_TOKEN'] as String);
+  editor.projects
+      .exportJson(projectId: int.parse(env['PROJECT_ID'] ?? '0'), language: 'es')
+      .then((value) => print(value));
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
