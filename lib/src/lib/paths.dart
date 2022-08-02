@@ -10,12 +10,17 @@ class ApiPaths {
   final String addProjects = '/v2/projects/add';
   final String deleteProjects = '/v2/projects/delete';
   final String updateProjects = '/v2/projects/update';
+  final String exportProjects = '/v2/projects/export';
 
   final String listTerms = '/v2/terms/list';
   final String addTerms = '/v2/terms/add';
   final String updateTerms = '/v2/terms/update';
   final String deleteTerms = '/v2/terms/delete';
   final String addCommentTerms = '/v2/terms/add_comment';
+
+  final String addTranslations = '/v2/terms/add';
+  final String updateTranslations = '/v2/terms/update';
+  final String deleteTranslations = '/v2/terms/delete';
 
   const ApiPaths();
 }

@@ -28,6 +28,10 @@ abstract class ServiceBase {
     return client.post(uri, body: body).then(onResponse);
   }
 
+  Future<Map<String, dynamic>> get(Uri uri, [Map<String, String>? headers = const {}]) async {
+    return client.get(uri, headers: headers).then(onResponse);
+  }
+
   FutureOr<Map<String, dynamic>> onResponse(Response response) {
     if (response.statusCode >= 400) {
       return Future.error(response);

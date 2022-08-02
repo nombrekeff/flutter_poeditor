@@ -27,6 +27,26 @@ class ProjectsService extends ServiceBase {
     }).then(_mapProject);
   }
 
+  Future<Map<String, dynamic>> exportJson({
+    required int projectId,
+    required String language,
+  }) async {
+    try {
+      final resp = await post(
+        Uri.parse(url).replace(path: paths.exportProjects),
+        {
+          'id': '$projectId',
+          'language': language,
+          'type': 'key_value_json',
+        },
+      );
+
+      return get(Uri.parse(resp['result']['url']));
+    } catch (e) {
+      return {};
+    }
+  }
+
   Future delete(int projectId) {
     return post(Uri.parse(url).replace(path: paths.deleteProjects), {'id': projectId});
   }

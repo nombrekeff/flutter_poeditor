@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:dart_poeditor/src/lib/entities/term.dart';
 import 'package:dart_poeditor/src/lib/entities/translation.dart';
+import '../responses.dart';
 import 'base_service.dart';
 
 class TermsService extends ServiceBase {
@@ -16,6 +19,13 @@ class TermsService extends ServiceBase {
       'id': projectId.toString(),
       'language': language,
     }).then(_mapTerms);
+  }
+
+  Future<AddResult> add(int projectId, List<TermData> terms) {
+    return post(Uri.parse(url).replace(path: paths.addTerms), {
+      'id': projectId.toString(),
+      'data': jsonEncode(terms),
+    }).then((data) => AddResult.fromJson(data, 'terms'));
   }
 
   Future<Map<String, dynamic>> getAsKeyValue(int projectId, String language) async {
