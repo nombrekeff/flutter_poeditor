@@ -1,5 +1,6 @@
 name: dart_poeditor
 description: A dart library for poeditor
+homepage: https://github.com/nombrekeff/flutter_poeditor
 version: 0.0.1
 
 environment:
